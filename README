@@ -1,0 +1,49 @@
+In functia "ConstrFr" care primeste ca parametru un char*, aloca un element de
+tip TArb, in campul info punand char* -ul primit ca parametru, iar in campurile
+stang si drept pune null, aceasta returneaza nodul creat.
+
+In functia "isOpetator" verifica daca char* -ul primit ca parametru este unul
+dintre cei 6 operator si retuneaza 1 daca e operator si 0 altfel.
+
+In functia "isNumber" verifc daca char* -ul primit ca parametru e numar si 
+returnez 1 daca e numar si 0 altfel.
+
+In functia "ConstrArb" care primeste ca parametri un TArb* si un char*, am pus
+conditia de iesire momentul cand x ajunge pe null(adica la finalul expresiei),
+apoi am verificat daca arborele este vid si am alocat nodul respectiv, apeland
+functia de constructie frunza. Apoi am verificat daca x este operator unar, si
+am apelat recursiv functia pentru partea stanga; asemanator am facut si pentru
+operatorii binari, doar ca am apelat constructie pe partea stanga si pe partea 
+dreapta. In apelurile recursive am folosit strtok(NULL," \n") pentru ca aceasta
+secventa continua impartirea sirului in subsiruri.
+
+In functia "distruge" am distrus subarborele stang si drept am eliberat memoria
+alocata pentru info din nod si am distrus nodul radacina.
+
+In functia "DistrArb" distrug toate nodurile de la adresa a, verific daca arborele
+este deja vid, nistrug toate nodurile si fac arborele = cu null.
+
+Functia "eval" primeste ca parametri, fisierul in care voi scrie eroarea, un arbore,
+numarul de variabile, cei 2 vectori creati cu variabilele si valorile lor, dar si un
+int* pe care il voi returna prin efect lateral. Am considerat variabila ok = 0 la
+inceput(adica nu exista erori) si am verificat daca ok a ramas 0 si arborele nevid,
+in acest if mare am verificat daca informatia in nodul respectiv nu este operator si
+nici numar(adica este variabila), am cautat variabila in vectorul meu de variabile,
+iar retinul valoarea intro variabila auxiliara si am iesit din for, iar daca i-ul
+din for a ajuns la n+1(adica a trecut de for fara sa gaseasca informatia din nod 
+in vecotorul de variabile) afisez codul de eroare, variabila nu exista; altfel
+returnez variabila auxiliara, iar daca nu este nici operator, dar este numar, returnez valoarea intreaga din info cu atoi(info). Cele 2 variabile left si right
+reprezinta rezultatele returnate de functie in urma apelului pe partea stanga si 
+partea dreapta. Apoi verific daca informatia din nod este operator si returnez 
+(left)operator(right). Pentru operatorlul impartiree am verific daca right=0 atunci
+sa returneze codul de eroare corespunzator si am afisat expresie invalida, la fel
+si pentru radical in cazul in care left <0. La final daca arborele este vid atunci
+sa returneze 1.
+
+In main am deschis fisierele de instrare si iesire, am verificat daca s-au deschis
+corect, am alocat memorie pentru vectorul in care urmeaza sa citim fiecare linie din
+fisier. Apoi urmeaza citirea efectiva a variabilelor si construirea efectiva a celor
+doi vectori; dupa aceeas citim fiecare expresie ii obtinem primul sir element,
+si apoi apelam functia de construire arbore; ulterior punem in variabila c rezultatul
+returnat de functia de evaluare si il afisam in functie de valoarea lui ok(adica daca
+acesta ramene neschimbat; la fel ca la inceputul programului). In final distrugem fiecare arbore creat, si eliberam memoria pentru vectorul de linii.
